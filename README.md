@@ -1,24 +1,22 @@
 # Advanced Topics in Communication Networks 2022
 
-**COPY PASTED FROM 2021 -- TO UPDATE**
-
 Welcome to the Advanced Topics in Communication Networks Repository!
 Here you will find the weekly exercises and instructions on how to run these exercises in a virtual environment.
 
 <!-- TOC depthTo:3 -->
 
-- [Advanced Topics in Communication Networks 2021](#advanced-topics-in-communication-networks-2021)
+- [Advanced Topics in Communication Networks 2022](#advanced-topics-in-communication-networks-2022)
   - [How to start?](#how-to-start)
     - [Access your own VM](#access-your-own-vm)
     - [Remote Development](#remote-development)
     - [VM Contents](#vm-contents)
   - [Exercises](#exercises)
-    - [Week 1-2: Introduction to P4 (21.09.2021 & 28.09.2021)](#week-1-2-introduction-to-p4-21092021--28092021)
-    - [Week 3: Load balancing (05.10.2021)](#week-3-load-balancing-ecmp-and-flowlet-switching-05102021)
-    - [Week 4: Probabilistic Data Structures  (12.10.2021)](#week-4-probabilistic-data-structures-12102021)
-    - [Week 5: MPLS (19.10.2021)](#week-5-mpls-19102021)
-    - [Week 6: RSVP (26.10.2021)](#week-6-rsvp-26102021)
-    - [Week 7: Fast Reroute (2.11.2021)](#week-7-fast-reroute-02112021)
+    - [Week 1-2: Introduction to P4 (20.09.2022 & 27.09.2022)](#week-1-2-introduction-to-p4-20092022--27092022)
+    - [Week 3: Load Balancing: ECMP and Flowlet Switching (04.10.2022)](#week-3-load-balancing-ecmp-and-flowlet-switching-04102022)
+    - [Week 4: Probabilistic Data Structures (11.10.2022)](#week-4-probabilistic-data-structures-11102022)
+    - [Week 5: MPLS (18.10.2022)](#week-5-mpls-18102022)
+    - [Week 6: RSVP (25.10.2022)](#week-6-rsvp-25102022)
+    - [Week 7-8: IP Fast Reroute to LFA (01.11.2022 & 08.11.2022)](#week-7-8-ip-fast-reroute-to-lfa-01112022--08112022)
   - [Any questions?](#any-questions)
 
 <!-- /TOC -->
@@ -67,23 +65,16 @@ dot at the end of the command and the capitalized P.
 We need to be able to open and edit remote files in our local code editor to have a smooth development cycle. This way, we can work with our code locally and execute it remotely without any friction. Below, we explain how to achieve this for Visual Studio Code as an example:
 
 1) Download Visual Studio Code.
-2) Access VS Code, in the left-side dock enter `Extensions` menu.
+2) Access VS Code; in the left-side dock enter `Extensions` menu.
 3) Install `Remote - SSH` extension.
 4) In the pop-up prompt: enter your SSH credentials as you did for the VM access.
 5) Your "Remote Directory" should appear in the Explorer.
-6) [Optional] Go to Extensions menu again, and install `P4 Language Extension` in your remote machine for highlights and syntax check.
+6) [Optional] Go to Extensions menu again and install `P4 Language Extension` in your remote machine for highlights and syntax check.
 
 For VS Code, you can find further information [here](https://code.visualstudio.com/docs/remote/ssh).
 Many other text editors provide similar functionality. For example, Atom has a [remote-synch](https://atom.io/packages/remote-sync) package to upload and download files directly from inside Atom.
 
 If you are already familiar with remote development, feel free to continue with your favorite code editor/setup.
-
-
-<!-- #### VM Credentials
-
-During the lecture, we will have two types of exercises. First, we will have p4-based exercises. Then, we will have exercises based on the mini-Internet.
-We will use two different users for the two types of exercises. For the p4-based exercises please use the login `p4`, and for the mini-Internet-based exercises please use the login `mini_internet`.
-We have sent you your password by email. It is the same for both logins. If you have not received your password please let us know immediately. -->
 
 ### VM Contents
 
@@ -101,43 +92,42 @@ To get the exercises ready in your VM, clone this repository in the `p4` user ho
 
 ```
 cd /home/p4/
-git clone https://gitlab.ethz.ch/nsg/public/adv-net-2021
+git clone https://gitlab.ethz.ch/nsg/public/adv-net-2022
 ```
 
 Update the local repository to get new tasks and solutions.
 Remember to pull this repository before every exercise session:
 
 ```
-cd /home/p4/adv-net-2021
-git pull https://gitlab.ethz.ch/nsg/public/adv-net-2021
+cd /home/p4/adv-net-2022
+git pull https://gitlab.ethz.ch/nsg/public/adv-net-2022
 ```
 
-### Week 1-2: Introduction to P4 (21.09.2021 & 28.09.2021)
+### Week 1-2: Introduction to P4 (20.09.2022 & 27.09.2022)
 
 * [Introduction to P4](./01-P4_Introduction)
 * [Layer 2 Switch](./02-L2_Switching)
 
-### Week 3: Load Balancing: ECMP and Flowlet Switching (05.10.2021)
+### Week 3: Load Balancing: ECMP and Flowlet Switching (04.10.2022)
 
  * [Load Balancing: ECMP & Flowlet Switching](./03-Load_Balancing)
 
-### Week 4: Probabilistic Data Structures (12.10.2021)
+### Week 4: Probabilistic Data Structures (11.10.2022)
 
  * [Probabilistic Data Structures](./04-Probabilistic_Data_Structures)
 
-### Week 5: MPLS (19.10.2021)
+### Week 5: MPLS (18.10.2022)
 
  * [MPLS](./05-MPLS)
 
-### Week 6: RSVP (26.10.2021)
+ ### Week 6: RSVP (25.10.2022)
 
  * [RSVP](./06-RSVP)
 
-### Week 7: Fast Reroute (2.10.2021)
+### Week 7-8: IP Fast Reroute to LFA (01.11.2022 & 08.11.2022)
 
-  * [Fast Reroute](./07-Fast-Reroute)
-
+ * [Fast_Reroute](./07-Fast_reroute)
 
 ## Any questions?
 
-If you have questions, you can ask us during the exercise sessions (every Tuesday at 4.15 pm) either in-person or via MS Teams in the `#Labs` channel. Please do **not** ask questions by email.
+If you have questions, you can ask us during the exercise sessions (every Tuesday at 4.15 pm) in person or via Slack in the `#exercises` channel. Please do **not** ask questions by email.
