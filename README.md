@@ -11,12 +11,8 @@ Here you will find the weekly exercises and instructions on how to run these exe
     - [Remote Development](#remote-development)
     - [VM Contents](#vm-contents)
   - [Exercises](#exercises)
-    - [Week 1-2: Introduction to P4 (20.09.2022 & 27.09.2022)](#week-1-2-introduction-to-p4-20092022--27092022)
+    - [Week 1 and 2: Introduction to P4 (20.09.2022 and 27.09.2022)](#week-1-and-2-introduction-to-p4-20092022-and-27092022)
     - [Week 3: Load Balancing: ECMP and Flowlet Switching (04.10.2022)](#week-3-load-balancing-ecmp-and-flowlet-switching-04102022)
-    - [Week 4: Probabilistic Data Structures (11.10.2022)](#week-4-probabilistic-data-structures-11102022)
-    - [Week 5: MPLS (18.10.2022)](#week-5-mpls-18102022)
-    - [Week 6: RSVP (25.10.2022)](#week-6-rsvp-25102022)
-    - [Week 7-8: IP Fast Reroute to LFA (01.11.2022 & 08.11.2022)](#week-7-8-ip-fast-reroute-to-lfa-01112022--08112022)
   - [Any questions?](#any-questions)
 
 <!-- /TOC -->
@@ -80,9 +76,9 @@ If you are already familiar with remote development, feel free to continue with 
 
 The VM is based on a Ubuntu 18.04.6 LTS, and after building, it contains:
 
-* The suite of P4 Tools ([p4lang](https://github.com/p4lang/), [p4utils](https://github.com/nsg-ethz/p4-utils), etc)
-* [Wireshark](https://www.wireshark.org/)
-* [Mininet](http://mininet.org/) network emulator
+- The suite of P4 Tools ([p4lang](https://github.com/p4lang/), [p4utils](https://github.com/nsg-ethz/p4-utils), etc)
+- [Wireshark](https://www.wireshark.org/)
+- [Mininet](http://mininet.org/) network emulator
 
 ## Exercises
 
@@ -92,7 +88,7 @@ To get the exercises ready in your VM, clone this repository in the `p4` user ho
 
 ```
 cd /home/p4/
-git clone https://gitlab.ethz.ch/nsg/public/adv-net-2022-exercises
+git clone https://gitlab.ethz.ch/nsg/public/adv-net-2022
 ```
 
 Update the local repository to get new tasks and solutions.
@@ -100,33 +96,33 @@ Remember to pull this repository before every exercise session:
 
 ```
 cd /home/p4/adv-net-2022
-git pull https://gitlab.ethz.ch/nsg/public/adv-net-2022-exercises
+git pull https://gitlab.ethz.ch/nsg/public/adv-net-2022
 ```
 
-### Week 1-2: Introduction to P4 (20.09.2022 & 27.09.2022)
+### Week 1 and 2: Introduction to P4 (20.09.2022 and 27.09.2022)
 
-* [Introduction to P4](./01-P4_Introduction)
-* [Layer 2 Switch](./02-L2_Switching)
+- [Introduction to P4](./01-P4_Introduction)
+- [Layer 2 Switch](./02-L2_Switching)
 
 ### Week 3: Load Balancing: ECMP and Flowlet Switching (04.10.2022)
 
- * [Load Balancing: ECMP & Flowlet Switching](./03-Load_Balancing)
+- [Load Balancing: ECMP & Flowlet Switching](./03-Load_Balancing)
 
-### Week 4: Probabilistic Data Structures (11.10.2022)
+<!-- ### Week 4: Probabilistic Data Structures (11.10.2022)
 
- * [Probabilistic Data Structures](./04-Probabilistic_Data_Structures)
+- [Probabilistic Data Structures](./04-Probabilistic_Data_Structures)
 
 ### Week 5: MPLS (18.10.2022)
 
- * [MPLS](./05-MPLS)
+- [MPLS](./05-MPLS)
 
- ### Week 6: RSVP (25.10.2022)
+### Week 6: RSVP (25.10.2022)
 
- * [RSVP](./06-RSVP)
+- [RSVP](./06-RSVP)
 
-### Week 7-8: IP Fast Reroute to LFA (01.11.2022 & 08.11.2022)
+### Week 7 and 8: IP Fast Reroute to LFA (01.11.2022 and 08.11.2022)
 
- * [Fast_Reroute](./07-Fast_reroute)
+- [Fast_Reroute](./07-Fast_reroute) -->
 
 ## Any questions?
 
