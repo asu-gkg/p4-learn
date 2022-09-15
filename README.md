@@ -12,7 +12,6 @@ Here you will find the weekly exercises and instructions on how to run these exe
     - [VM Contents](#vm-contents)
   - [Exercises](#exercises)
     - [Week 1 and 2: Introduction to P4 (20.09.2022 and 27.09.2022)](#week-1-and-2-introduction-to-p4-20092022-and-27092022)
-    - [Week 3: Load Balancing: ECMP and Flowlet Switching (04.10.2022)](#week-3-load-balancing-ecmp-and-flowlet-switching-04102022)
   - [Any questions?](#any-questions)
 
 <!-- /TOC -->
@@ -104,11 +103,11 @@ git pull git@gitlab.ethz.ch:nsg/public/adv-net-2022-exercises.git
 - [Introduction to P4](./01-P4_Introduction)
 - [Layer 2 Switch](./02-L2_Switching)
 
-### Week 3: Load Balancing: ECMP and Flowlet Switching (04.10.2022)
+<!-- ### Week 3: Load Balancing: ECMP and Flowlet Switching (04.10.2022)
 
 - [Load Balancing: ECMP & Flowlet Switching](./03-Load_Balancing)
 
-<!-- ### Week 4: Probabilistic Data Structures (11.10.2022)
+### Week 4: Probabilistic Data Structures (11.10.2022)
 
 - [Probabilistic Data Structures](./04-Probabilistic_Data_Structures)
 
