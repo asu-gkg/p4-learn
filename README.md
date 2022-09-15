@@ -30,14 +30,14 @@ Once you have installed an SSH client, use the following command to connect your
 VM:
 
 ```
-ssh -p X p4@orval.ethz.ch
+ssh -p X p4@duvel.ethz.ch
 ```
 
 Where X = 2000 + your student number for this lecture that we have sent you by email.
 For instance, if you are Student-7, use the following command:
 
 ```
-ssh -p 2007 p4@orval.ethz.ch
+ssh -p 2007 p4@duvel.ethz.ch
 ```
 
 If you cannot connect to your VM,
@@ -49,7 +49,7 @@ password**. If you want to download an entire directory (e.g., the configs direc
 VM to the current directory of your own machine, you can use scp:
 
 ```
-scp -r -P X p4@orval.ethz.ch:~/path to the directory .
+scp -r -P X p4@duvel.ethz.ch:~/path to the directory .
 ```
 
 Where X = 2000 + your student number. On Windows, you can use WinSCP7 to do that. Note the
@@ -103,7 +103,7 @@ git pull git@gitlab.ethz.ch:nsg/public/adv-net-2022-exercises.git
 - [Introduction to P4](./01-P4_Introduction)
 - [Layer 2 Switch](./02-L2_Switching)
 
-<!-- ### Week 3: Load Balancing: ECMP and Flowlet Switching (04.10.2022)
+<!--### Week 3: Load Balancing: ECMP and Flowlet Switching (04.10.2022)
 
 - [Load Balancing: ECMP & Flowlet Switching](./03-Load_Balancing)
 
