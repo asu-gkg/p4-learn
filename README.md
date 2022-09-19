@@ -87,15 +87,15 @@ To get the exercises ready in your VM, clone this repository in the `p4` user ho
 
 ```
 cd /home/p4/
-git clone git@gitlab.ethz.ch:nsg/public/adv-net-2022-exercises.git
+git clone https://gitlab.ethz.ch/nsg/public/adv-net-2022-exercises.git
 ```
 
 Update the local repository to get new tasks and solutions.
 Remember to pull this repository before every exercise session:
 
 ```
-cd /home/p4/adv-net-2022
-git pull git@gitlab.ethz.ch:nsg/public/adv-net-2022-exercises.git
+cd /home/p4/adv-net-2022-exercises
+git pull https://gitlab.ethz.ch/nsg/public/adv-net-2022-exercises.git
 ```
 
 ### Week 1 and 2: Introduction to P4 (20.09.2022 and 27.09.2022)
