@@ -95,7 +95,7 @@ Remember to pull this repository before every exercise session:
 
 ```
 cd /home/p4/adv-net-2022-exercises
-git pull https://gitlab.ethz.ch/nsg/public/adv-net-2022-exercises.git
+git pull
 ```
 
 ### Week 1 and 2: Introduction to P4 (20.09.2022 and 27.09.2022)
