@@ -95,16 +95,26 @@ the most important ones).
 ### Performance Optimizations
 
 To test the performance of our implementation we will need to send hundreds of
-thousands of packets through the switch. Below, we explain how you can increase
-the performance of `bmv2` to achieve higher throughput.
+thousands of packets through the switch. For that, we need to disable all the
+debugging that the switch does. Below, we explain how you can increase the
+performance of `bmv2` to achieve higher throughput.
 
 #### Disabling Debugging in the bmv2 Switch
-As you have already seen in the previous exercises, if you do an `iperf`
+As you might have already seen in the previous exercises, if you do an `iperf`
 between two directly connected hosts you get roughly a bandwidth of `15~20mbps`.
-In order to be able to send packets fast to the switch we can clone the
+In order to be able to send fast packets through the switch we can clone the
 repository again with a different name and compile it with different flags.
 Since this process can take up to 10 minutes you can just leave it running in
 the background.
+
+**IMPORTANT:** It is recommended that you do not run the `sudo make install`
+command until you have a working solution. When using this optimized compilation
+the switch will not generate log files, and thus it will be hard for you to
+properly debug your program. Also, if you are using our VM you should already
+have the optimized switch built at the `~/p4-tools/bmv2-opt` folder. If so, you
+can skip the `make` part and directly run `sudo make install` & `sudo ldconfig`
+instead.
+
 ```bash
 cd ~/p4-tools/
 git clone https://github.com/p4lang/behavioral-model.git bmv2-opt
@@ -116,10 +126,8 @@ make -j 2
 sudo make install
 sudo ldconfig
 ```
-**IMPORTANT:** It is recommended that you do not run the `sudo make install`
-command until you have a working solution. When using this optimized compilation
-the switch will not generate log files, and thus it will be hard for you to
-properly debug your program. Since we keep the two compiled versions of `bmv2`
+
+Since we keep the two compiled versions of `bmv2`
 in different folders, you can enable the one with the `debugging` enabled by
 just running the `make install` command again:
 ```bash
@@ -127,6 +135,7 @@ cd ~/p4-tools/bmv2
 sudo make install
 sudo ldconfig
 ```
+
 Thus by running `sudo make install` in `~/p4-tools/bmv2` or `~/p4-tools/bmv2-opt` you can easily enable each compiled version.
 
 ### Some Notes on Debugging and Troubleshooting
@@ -143,7 +152,8 @@ controller. After completion of this part, we should be able to add/delete
 reservations through the controller's CLI. The controller should make the
 allocations taking into account `src`, `dst`, `duration` and `bw`. Furthermore,
 although the controller will take the reservation `bandwidth` into consideration
-when making the path allocations, we will still not rate limit them in practice.
+when making the path allocations, we will not enforce an actual rate limit until
+the next part of the exercise (see below).
 
 ## Configure MPLS from the Controller
 
@@ -161,9 +171,6 @@ the table currently only matches on the destination IP address, switches would
 forward traffic to a destination irrespective of the source address, which is
 not what RSVP should do. To fix this, we also match on the source IP address and
 we modify the table structure such that it looks as follows:
-
-We will basically add `ipv4.srcAddr` to the match keys, and optionally, you can
-extend the `mpls_ingress_X_hop` actions to support more hops:
 
 ```
 table FEC_tbl {
@@ -185,7 +192,13 @@ table FEC_tbl {
     }
 ```
 
-> NOTE: bmv2 allows only one `lpm` match per table and you will later see why we
+We will basically add `ipv4.srcAddr` to the match keys, and optionally, you can
+extend the `mpls_ingress_X_hop` actions to support more hops:
+
+> NOTE1: you do not have to do anything for this Tasks, the provided code
+> already has the updated version of the `FEC_tbl` 
+
+> NOTE2: bmv2 allows only one `lpm` match per table and you will later see why we
 do the `lpm` match on the source IP.
 
 ### Task 2: Install Rules for MPLS Forwarding
@@ -194,7 +207,8 @@ In this task, we will only configure the switches to forward traffic based on
 the MPLS label and the IP addresses. Later, we will add the configurations to
 push label stacks onto packets at ingress switches. In other words, we will
 automatically populate the `mpls_tbl` table and `FEC_tbl` for the `ipv4_forward`
-action.
+action. For this task, you will be required to use some of the controller API
+helper functions(`Topology` class). See the hints below. 
 
 Remember from the MPLS exercise that we need to add the following entries:
 
@@ -232,16 +246,17 @@ A few hints which will help you to solve this task:
 Useful methods provided by the `Topology` object that will help you in this
 task:
 
-- `self.topo.get_hosts_connected_to(sw_name)` returns all the hosts connected to
-  `sw_name`.
-- `self.topo.get_switches_connected_to(sw_name)` returns all the switches
-  connected to `sw_name`.
-- `self.topo.node_to_node_port_num(sw_name, host)` returns the port at which
-  `sw_name` is connected to `host`.
-- `self.topo.node_to_node_mac(switch, sw_name)` returns the MAC address of the
-  interface on `switch` which is connected to `sw_name`.
-- `self.topo.get_host_ip(host)` returns the IP address of `host`
-- `self.topo.get_host_mac(host)` returns the MAC address of `host`
+- `self.topo.get_hosts_connected_to(name)` returns all the hosts connected to
+  `name`.
+- `self.topo.get_switches_connected_to(name)` returns all the switches
+  connected to `name`.
+- `self.topo.node_to_node_port_num(node1, node2)` Gets the number of the port of
+  `node1` that is connected to `node2`.
+
+- `self.topo.node_to_node_mac(node1, node2)` returns the MAC address of the
+  interface on `node1` which is connected to `node2`.
+- `self.topo.get_host_ip(name)` returns the IP address of `name`
+- `self.topo.get_host_mac(name)` returns the MAC address of `name`
 - `controller.table_add(table_name, action, [match1, match2], [action_parameter1, action_parameter2])` 
   inserts a table entry. Note that, `table_add` expects all parameters in match and action lists to be strings, 
   make sure you cast them before.
@@ -323,7 +338,7 @@ the following steps:
    - Implement `build_mpls_path(switches_path)` such that it returns the list of
      MPLS labels that make a packet following the given `switches_path`. Hint:
      `self.topo.node_to_node_port_num(current_node, next_node)` returns you the
-     port at which `current_node` is connected to `next_node`. Take into account that
+     port number at which `current_node` is connected to `next_node`. Take into account that
      your `rsvp.p4` program might add the port-labels in the reverse order, this will depend
      on your `mpls` implementation. Thus, make sure you add the labels in the right order.
 
@@ -369,7 +384,7 @@ the following steps:
       return an entry handle that you should save.
 
     - If there is already a reservation for the same (src,dst) pair, use 
-      ``self.controllers[sw_id].table_modify(table_name, action, entry_handle, action_parameters)`
+      `self.controllers[sw_id].table_modify(table_name, action, entry_handle, action_parameters)`
       to modify it.
 
     - If the entry insertion or modification was successful (i.e., handle was
@@ -487,6 +502,10 @@ Entry has been added with handle 16777218
 Successful reservation(h6->h1): path: s7->s6->s3->s1
 ```
 
+> Note that the successful reservation print message is an artifact of our
+solution. Unless you add your own prints for debugging you should not see such
+message.
+
 After you added these two reservations, you should see responses from `ping` during about 20 seconds:
 ```
 64 bytes from 10.7.6.2: icmp_seq=11 ttl=59 time=12.3 ms
@@ -569,9 +588,11 @@ associated meter is configured properly.
 
 ### Data plane tasks:
 
-1. Whenever a meter is executed, the color is saved into a metadata field. Define that field in your metadata structure.
+1. Whenever a meter is executed, the color is saved into a metadata field.
+Define that field in your metadata structure. Since the output can only be three
+colors, using a 2 bit field will be enough.
 2. Define a direct meter at the beginning of your ingress pipeline. You can find an example in the slides and 
-   some documentation in the [v1model documentation](https://github.com/p4lang/p4c/blob/master/p4include/v1model.p4).
+   some documentation in the [v1model documentation](https://github.com/p4lang/p4c/blob/main/p4include/v1model.p4#L253).
 3. Associate the direct meter with the table `FEC_tbl`. 
 4. Read the meter in all the `mpls_ingress_x_hop` actions to your metadata field. 
 5. Update your ingress control logic and drop all the packets for which the meter is yellow or red (not green).
@@ -585,13 +606,18 @@ that associated meters get configured with the desired rate.
 1. Understand how two-rate three-color meters work. See the text above, or read the RFC. To configure
    meters using our control plane API you will have to use `meter_set_rates(meter_name, handle, rates)`.
    `meter_name` is the name you called the meter in `P4`, `handle` is the table handle for the reservation rule and 
-   `rates` is a list of the form `[(CIR, CBS), (PIR, PBS)]`. *IMPORTANT:* in `bmv2` `CIR` and `PIR` are the bucket 
-   filling rate per microsecond. For example, if `CIR=1` the bucket is filled at a rate of 1000000 Bytes/s (or packets). 
+   `rates` is a list of the form `[(CIR, CBS), (PIR, PBS)]`. 
+   
+   **IMPORTANT:** in `bmv2` `CIR` and `PIR` are the bucket filling rate per
+   microsecond. For example, if `CIR=1` the bucket is filled at a rate of
+   1000000 Bytes/s (or packets). Note that we will be setting our bandwidths in
+   terms of bits per second. So for example to get 1Mbps, you should be setting
+   the `CIR` and `PIR` to 0.125. 
 
 2. Implement the function `get_meter_rates_from_bw(self, bw, burst_size)`. This function has to return 
    `[(CIR, CBS), (PIR, PBS)]`. Use `bw` (Mbps) to compute `CIR` and `PIR` (in bytes). 
-   To make it easier, in this exercise we will make the committed and peak 
-   parameters the same. Also, you can set `burst_size` to default to 700000. 
+   To make it easier, in this exercise we will set the committed and peak 
+   parameters the same value. Also, you can set `burst_size` to default to 700000. 
    
 3. Implement the function `set_direct_meter_bandwidth(self, sw_name, meter_name, handle, bw)`. This function 
    calls `get_meter_rates_from_bw` and by using the meter name, handle and rates configures
@@ -660,6 +686,8 @@ iperf -s -p 5001
 ```
 
 4. Start an iperf client at `h1, h2` and check if each reservation gets the desired bandwidth.
+
+> Note: to know the IP addresses of `h5` and `h6` you can check the mininet CLI. 
 
 <p align="center">
 <img src="images/rate-limit-test.png" title="Rate limiting test">

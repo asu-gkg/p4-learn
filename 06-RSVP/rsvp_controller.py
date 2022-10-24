@@ -95,7 +95,7 @@ class RSVPController(object):
             pass
             # TODO PART 1 TASK 2
             # 1) for all the hosts connected to this switch add the FEC_tbl entry
-            # 2) for all switches connected to this switch add the 2 mplt_tbl entries
+            # 2) for all switches connected to this switch add the two (normal and penultimate) mplt_tbl entries
 
 
     def build_mpls_path(self, switches_path):
@@ -270,7 +270,7 @@ class RSVPController(object):
                 # add entry or modify
                 # PART 2  TASK 1.4 Configure the associated meter properly.
 
-                # update controllers data structures: self.current_reservation & self.links_capacity
+                # update controllers data structures: self.current_reservations & self.links_capacity
                
 
             # PART 1, TASK 3.2 otherwise we print no path available

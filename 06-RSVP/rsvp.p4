@@ -109,7 +109,7 @@ control MyIngress(inout headers hdr,
                   inout metadata meta,
                   inout standard_metadata_t standard_metadata) {
 
-    // PART 2 TASK 1.2 Define the direct meter
+    // PART 2 TASK 1.2 Define the direct meter (see v1model for more info)
 
     action drop() {
         mark_to_drop(standard_metadata);

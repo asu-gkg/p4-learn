@@ -12,6 +12,10 @@ Here you will find the weekly exercises and instructions on how to run these exe
     - [VM Contents](#vm-contents)
   - [Exercises](#exercises)
     - [Week 1 and 2: Introduction to P4 (20.09.2022 and 27.09.2022)](#week-1-and-2-introduction-to-p4-20092022-and-27092022)
+    - [Week 3: Load balancing (04.10.2021)](#week-3-load-balancing-ecmp-and-flowlet-switching-04102022)
+    - [Week 4: Probabilistic Data Structures  (11.10.2021)](#week-4-probabilistic-data-structures-11102022)
+    - [Week 5: MPLS (18.10.2021)](#week-5-mpls-18102022)
+    - [Week 6: RSVP (25.10.2021)](#week-6-rsvp-25102022)
   - [Any questions?](#any-questions)
 
 <!-- /TOC -->
@@ -103,7 +107,7 @@ git pull
 - [Introduction to P4](./01-P4_Introduction)
 - [Layer 2 Switch](./02-L2_Switching)
 
-<!--### Week 3: Load Balancing: ECMP and Flowlet Switching (04.10.2022)
+### Week 3: Load Balancing: ECMP and Flowlet Switching (04.10.2022)
 
 - [Load Balancing: ECMP & Flowlet Switching](./03-Load_Balancing)
 
@@ -119,6 +123,7 @@ git pull
 
 - [RSVP](./06-RSVP)
 
+<!--
 ### Week 7 and 8: IP Fast Reroute to LFA (01.11.2022 and 08.11.2022)
 
 - [Fast_Reroute](./07-Fast_reroute) -->
