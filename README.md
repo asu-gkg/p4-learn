@@ -135,6 +135,7 @@ If you have questions, you can ask us during the exercise sessions (every Tuesda
 
 ## p4 util install 
 ```
-curl -sSL https://raw.githubusercontent.com/nsg-ethz/p4-utils/master/install-tools/install-p4-dev.sh | bash
-
+git clone https://github.com/nsg-ethz/p4-utils
+cd p4-utils
+sudo ./install.sh
 ```
