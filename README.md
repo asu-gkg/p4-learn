@@ -131,3 +131,10 @@ git pull
 ## Any questions?
 
 If you have questions, you can ask us during the exercise sessions (every Tuesday at 4.15 pm) in person or via Slack in the `#exercises` channel. Please do **not** ask questions by email.
+
+
+## p4 util install 
+```
+curl -sSL https://raw.githubusercontent.com/nsg-ethz/p4-utils/master/install-tools/install-p4-dev.sh | bash
+
+```
