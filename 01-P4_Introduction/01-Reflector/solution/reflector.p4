@@ -32,7 +32,7 @@ parser MyParser(packet_in packet,
                 inout standard_metadata_t standard_metadata) {
 
       state start{
-  	  packet.extract(hdr.ethernet);
+          packet.extract(hdr.ethernet);
           transition accept;
       }
 
