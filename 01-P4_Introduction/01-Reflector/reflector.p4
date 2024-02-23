@@ -39,7 +39,7 @@ parser MyParser(packet_in packet,
           // 是一个特殊的关键字，用来表示一个解析状态的终结。
           // 当一个解析状态（state）的过渡（transition）指向accept时，
           // 这意味着解析器已经完成了对当前数据包的解析任务，数据包将会继续往下一个阶段移动，比如进入Ingress处理阶段。
-          transition accept; 
+          transition accept;
       }
 
 }
