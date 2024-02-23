@@ -17,13 +17,13 @@ struct headers {
 *************************************************************************/
 
 parser MyParser(packet_in packet,
-                out headers hdr,
-                inout metadata meta,
-                inout standard_metadata_t standard_metadata) {
+out headers hdr,
+inout metadata meta,
+inout standard_metadata_t standard_metadata) {
 
-      state start{
-          transition accept;
-      }
+state start{
+        transition accept;
+}
 }
 
 /*************************************************************************
@@ -43,20 +43,24 @@ control MyIngress(inout headers hdr,
                   inout metadata meta,
                   inout standard_metadata_t standard_metadata) {
 
-    /* TODO 1: For solution 2 -> define a table that matches standard_metadata.ingress_port */
-    /* TODO 2: For solution 2 -> define an action that modifies the egress_spec */
+    action forward(bit<9> egress_port){
+        standard_metadata.egress_spec = egress_port;
+    }
+
+    table repeater {
+            key = {
+                    standard_metadata.ingress_port: exact;
+            }
+            actions = {
+                forward;
+                NoAction;
+            }
+            size = 2;
+            default_action = NoAction;
+    }
 
     apply {
-
-        /* TODO 3:*/
-        /* Solution 1: Without tables, write the algorithm directly here*/
-        /* Solution 2: Apply the table you use */
-        if (standard_metadata.ingress_port == 1){
-            standard_metadata.egress_spec = 2;
-        }
-        if (standard_metadata.ingress_port == 2){
-            standard_metadata.egress_spec = 1;
-        }
+            repeater.apply();
     }
 }
 
@@ -85,7 +89,7 @@ control MyComputeChecksum(inout headers  hdr, inout metadata meta) {
 control MyDeparser(packet_out packet, in headers hdr) {
     apply {
 
-    /* Deparser not needed */
+            /* Deparser not needed */
 
     }
 }
@@ -95,10 +99,10 @@ control MyDeparser(packet_out packet, in headers hdr) {
 *************************************************************************/
 
 V1Switch(
-MyParser(),
-MyVerifyChecksum(),
-MyIngress(),
-MyEgress(),
-MyComputeChecksum(),
-MyDeparser()
+        MyParser(),
+        MyVerifyChecksum(),
+        MyIngress(),
+        MyEgress(),
+        MyComputeChecksum(),
+        MyDeparser()
 ) main;
